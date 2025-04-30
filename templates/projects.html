@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Yulovchi - {% trans 'Projects' %}{% endblock title %}
+
+{% block content %}
+<main id="main" class="py-10" data-astro-cid-3zbxo6iv>
+    <section class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-text-heading dark:text-white mb-8 mt-5 mb-10">
+            {% trans "All My Projects:" %}
+        </h1>
+        <div class="grid gap-8">
+            <!-- Project Card 1 -->
+            {% for project in all_projects %}
+            <a href="{% url 'project_detail' project.id %}" class="project-card group block bg-gray-100 dark:bg-gray-800 rounded-lg p-6 transition-all duration-300 ease-in-out border-2 border-gray-300 dark:border-gray-600 hover:shadow-lg" style="border-style: double;">
+                <h2 class="text-xl font-semibold text-text-bold dark:text-white mb-3" style="margin-left: 1rem;">{{ project.title }}</h2>
+                <p class="text-text-body dark:text-gray-400" style="margin-left: 1.8rem;">{{ project.desctription }}</p>
+                <span class="text-sm text-primary-main dark:text-blue-400 mt-4 inline-block group-hover:translate-x-2 transition-transform " style="margin-left: 1.8rem;">View Details →</span>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

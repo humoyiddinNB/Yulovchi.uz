@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}Yulovchi - {{ project.title }}{% endblock title %}
+
+{% block content %}
+<main id="main" class="py-10 px-4 sm:px-6 lg:px-8 max-w-[1200px] mx-auto w-full">
+    <!-- Back to Projects Link -->
+    <a href="{% url 'projects' %}" class="inline-flex items-center mb-8 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        {% trans "Back to Projects" %}
+    </a>
+
+    <!-- Project Header -->
+    <div class="mb-10">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4 relative inline-block">
+            {{ project.title }}
+            <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-blue-300 dark:from-blue-400 dark:to-blue-200 transform -translate-y-1 rounded-full opacity-70"></span>
+        </h1>
+        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+            <span class="flex items-center mr-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {{ project.created_at|date:"F d, Y" }}
+            </span>
+            <div class="flex items-center">
+                <span class="flex items-center gap-1 mr-4px">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span class="view-count">{{ project.views }}</span>
+                </span>
+                <button class="like-button flex items-center gap-1 ml-3px;" data-project-id="{{ project.id }}" aria-label="Like or unlike this project">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                    <span class="like-count">{{ project.likes }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Project Description -->
+    <div class="mb-2px text-gray-700 dark:text-white">
+        <p class="text-lg font-medium leading-relaxed mb-6">{{ project.desctription }}</p>
+    </div>
+
+    <!-- Project Content -->
+    <div class="prose prose-lg dark:prose-invert max-w-none mb-5px">
+        {{ project.body|safe }}
+    </div>
+
+    <!-- Project Meta Info -->
+    <div class="flex justify-between items-start text-sm text-gray-500 dark:text-gray-400" style="margin-bottom: 70px; margin-top: 50px;">
+        <!-- Meta Info (chapda) -->
+        <div>
+            <p>🛠️ {% trans 'Built:' %} {{ project.created_at|date:"F d, Y  H:i" }}</p>
+            <p>🔄 {%trans 'Last updated:' %} {{ project.updated_at|date:"F d, Y  H:i" }}</p>
+        </div>
+
+        <!-- GitHub Button (o‘ngda) -->
+
+        <div class="flex flex-wrap gap-4">
+            {% if project.github_url %}
+            <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer" class="github-button inline-flex items-center px-4 py-2 bg-gray-900 text-white !text-white rounded-md hover:bg-gray-800 transition-colors duration-200 transition-transform duration-300 hover:scale-105 dark:bg-gray-700 dark:!text-white dark:hover:bg-gray-600">
+                <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                </svg>
+                {% trans 'Behind the Scenes' %}️ 🛠
+            </a>
+            {% endif %}
+        </div>
+
+
+    </div>
+</main>
+{% endblock %}
