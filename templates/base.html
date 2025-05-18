@@ -659,6 +659,69 @@ html.dark #lang-circle {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; img-src 'self' https: data:; connect-src 'self' ws: wss: https:;">
+<style>
+/* Responsive Logo */
+.logo-image {
+  width: 200px;
+  display: block;
+  margin: 30px auto 60px;
+}
+
+@media (max-width: 768px) {
+  .logo-image {
+    width: 150px;
+    margin: 20px auto 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-image {
+    width: 120px;
+    margin: 15px auto 30px;
+  }
+}
+
+#main {
+  max-width: 90%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+  #main {
+    max-width: 1200px;
+  }
+}
+
+footer {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  footer {
+    text-align: left;
+    padding-left: 2rem;
+  }
+}
+
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .social-icons {
+    justify-content: flex-start;
+  }
+}
+
+.text-lg {
+  max-width: 100%;
+}
+</style>
 
 </head>
 <body class="max-w-3xl mx-auto min-h-screen px-6 sm:px-8 font-sans tracking-wide" data-astro-cid-3zbxo6iv>
